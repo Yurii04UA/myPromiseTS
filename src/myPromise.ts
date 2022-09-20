@@ -8,7 +8,7 @@ class MyPromise {
     error: string | number = '';
     constructor(executor: Function) {
         return executor(this.resolve.bind(this), this.reject.bind(this))
-    }
+    };
 
     resolve(data: number | string) {
         this.isFulfilled = true;
@@ -17,8 +17,8 @@ class MyPromise {
         if (typeof this.onResolved === "function" && !this.isCalled) {
             this.onResolved(data);
             this.isCalled = true;
-        }
-    }
+        };
+    };
 
     reject(err: number | string) {
         this.isRejected = true;
@@ -54,7 +54,7 @@ class MyPromise {
             reject(error)
         });
     };
-}
+};
 
 const aaa = new MyPromise((resolve: Function, reject: Function) => {
     setTimeout(() => {
