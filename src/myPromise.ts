@@ -1,29 +1,20 @@
 type TypeParam = (param: string | number) => void;
 type PromiseExecutor = (resolve: TypeParam, reject: TypeParam) => any;
 
-interface IPromise {
-  onResolved: TypeParam;
-  onRejected: TypeParam;
-  isCalled: boolean;
-  isFulfilled: boolean;
-  isRejected: boolean;
-  value: string | number;
-  error: string | number;
-}
 
-class MyPromise implements IPromise {
-  onResolved: TypeParam = () => {};
-  onRejected: TypeParam = () => {};
-  isCalled: boolean = false;
-  isFulfilled: boolean = false;
-  isRejected: boolean = false;
-  value: string | number = "";
-  error: string | number = "";
+class MyPromise {
+  private onResolved: TypeParam = () => {};
+  private onRejected: TypeParam = () => {};
+  private isCalled: boolean = false;
+  private isFulfilled: boolean = false;
+  private isRejected: boolean = false;
+  private value: string | number = "";
+  private error: string | number = "";
   constructor(executor:PromiseExecutor) {
     return executor(this.resolve.bind(this), this.reject.bind(this));
   }
 
-  resolve(data: number | string) {
+  private resolve(data: number | string) {
     this.isFulfilled = true;
     this.value = data;
     // console.log(this.value);
@@ -33,7 +24,7 @@ class MyPromise implements IPromise {
     }
   }
 
-  reject(err: number | string) {
+    private reject(err: number | string) {
     this.isRejected = true;
     this.error = err;
     if (typeof this.onRejected === "function" && !this.isCalled) {
@@ -90,3 +81,4 @@ const aaa = new MyPromise(
 // MyPromiseClass.resolve('sd').then(e => console.log('aa',e))
 
 // MyPromise.resolve('aaaaa').then(e => console.log(e)).catch(e => console.error(e));
+
