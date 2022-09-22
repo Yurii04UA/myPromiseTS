@@ -1,4 +1,4 @@
-interface IInterface{
+type IInterface ={
     json(): string;
     userId:number,
     id:number,
@@ -6,7 +6,7 @@ interface IInterface{
     completed:boolean
   }
 
-const async = (generator: Function) => {
+const async = (generator: Function ) => {
     const g = generator();
   
     (function next(value) {
