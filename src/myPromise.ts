@@ -1,5 +1,5 @@
 type TypeParam = (param: string | number) => void;
-type PromiseExecutor = (resolve: TypeParam, reject: TypeParam) => any;
+type PromiseExecutor = (resolve: TypeParam, reject: TypeParam) => void;
 
 
 class MyPromise {
@@ -10,8 +10,8 @@ class MyPromise {
   private isRejected: boolean = false;
   private value: string | number = "";
   private error: string | number = "";
-  constructor(executor:PromiseExecutor) {
-    return executor(this.resolve.bind(this), this.reject.bind(this));
+  constructor(executor: PromiseExecutor) {
+     executor(this.resolve.bind(this), this.reject.bind(this));
   }
 
   private resolve(data: number | string) {
@@ -81,4 +81,3 @@ const aaa = new MyPromise(
 // MyPromiseClass.resolve('sd').then(e => console.log('aa',e))
 
 // MyPromise.resolve('aaaaa').then(e => console.log(e)).catch(e => console.error(e));
-
